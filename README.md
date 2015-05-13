@@ -16,3 +16,6 @@ http://www.youtube.com/user/c9ide.
 
 Happy coding!
 The Cloud9 IDE team
+
+
+Run server with command 'python manage.py runserver $IP:$PORT'
