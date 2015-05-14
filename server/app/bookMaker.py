@@ -1,4 +1,4 @@
-import os, cStringIO, zipfile, json
+import os, io, zipfile, json
 
 APP_DIR = os.path.dirname(os.path.abspath(__file__))
 
@@ -12,7 +12,7 @@ class BookMaker:
     def getZipStream(self):
         fileName = os.path.join(APP_DIR, '../files/greatGatsby.epub')
     
-        buffer = cStringIO.StringIO()
+        buffer = io.StringIO()
         zip = zipfile.ZipFile(buffer, "w", zipfile.ZIP_DEFLATED)
         
         with zipfile.ZipFile(fileName, 'r') as originalBook:
