@@ -12,7 +12,8 @@ def index(request):
 def getBook(request):
     response = HttpResponse(content_type='application/zip')
     response['Content-Disposition'] = 'filename="book.epub"'
-    ret_zip = BookMaker.getZipStream(JSON)
+    bookMaker = BookMaker(JSON)
+    ret_zip = bookMaker.getZipStream()
     response.write(ret_zip)
     return response
     

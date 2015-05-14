@@ -1,11 +1,13 @@
-import os, cStringIO, zipfile
+import os, cStringIO, zipfile, json
 
 APP_DIR = os.path.dirname(os.path.abspath(__file__))
 
 class BookMaker:
     
-    @staticmethod
-    def getZipStream(json):
+    def __init__(self, replacementWords):
+        self.replacementWords = replacementWords
+    
+    def getZipStream(self):
         fileName = os.path.join(APP_DIR, '../files/greatGatsby.epub')
     
         buffer = cStringIO.StringIO()
@@ -15,7 +17,7 @@ class BookMaker:
             for fileEntryName in originalBook.namelist():
                 with originalBook.open(fileEntryName) as fileEntry:
                     if "main" in fileEntryName:
-                        zip.writestr(fileEntryName, fileEntry.read().replace("Gatsby", "Phil"))
+                        zip.writestr(fileEntryName, self.getFileContents(fileEntry.read()))
                     else:
                         zip.writestr(fileEntryName, fileEntry.read())
         
@@ -26,3 +28,9 @@ class BookMaker:
         buffer.close()
         
         return ret_zip
+        
+    def getFileContents(self, fileContents):
+        newFileContents = fileContents
+        for replaceEntry in json.loads(self.replacementWords):
+            newFileContents = newFileContents.replace(replaceEntry['replace'].encode("ascii"), replaceEntry['with'].encode("ascii"))
+        return newFileContents
