@@ -2,6 +2,8 @@ import os, cStringIO, zipfile, json
 
 APP_DIR = os.path.dirname(os.path.abspath(__file__))
 
+#TEST JSON = '[ { "replace": "Gatsby", "with": "Phil" }, { "replace": "man", "with": "fish" } ]'
+
 class BookMaker:
     
     def __init__(self, replacementWords):
