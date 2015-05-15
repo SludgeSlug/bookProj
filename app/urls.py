@@ -1,4 +1,4 @@
-from django.conf.urls import patterns, include
+from django.conf.urls import patterns, include, static
 from django.conf import settings
 from django.views.generic import TemplateView
 
@@ -16,3 +16,5 @@ urlpatterns = patterns('',
     (r'^api/book', 'app.views.getBook'),
 
 )
+
+static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

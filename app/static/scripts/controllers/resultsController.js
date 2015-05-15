@@ -18,6 +18,7 @@
             var request = http({
                 method: 'post',
                 url: 'https://sludgeslug.pythonanywhere.com/api/book/',
+                withCredentials: true,
                 data: wordService.words
             });
             
