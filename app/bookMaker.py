@@ -16,7 +16,7 @@ class BookMaker:
         with zipfile.ZipFile(fileName, 'r') as originalBook:
             for fileEntryName in originalBook.namelist():
                 with originalBook.open(fileEntryName) as fileEntry:
-                    if "main" in fileEntryName:
+                    if "main" in fileEntryName and fileEntryName.endswith('.xml'):
                         zip.writestr(fileEntryName, self.getFileContents(fileEntry.read()))
                     else:
                         zip.writestr(fileEntryName, fileEntry.read())
