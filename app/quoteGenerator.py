@@ -1,28 +1,54 @@
-import os, zipfile, re
+import os, zipfile, re, json, urllib
 
 APP_DIR = os.path.dirname(os.path.abspath(__file__))
 
 class QuoteGenerator:
     
+    def __init__(self, replacementWords):
+        self.replacementWords = urllib.unquote(replacementWords).decode('utf-8')
+    
     def getQuote(self):
         
         quotes = self.getMergedParagraphs()
+        matches = []
         
         for quote in quotes:
-            print quote
+            matches.append([self.getNumberOfMatches(quote),quotes.index(quote)])
+            
+        matches = sorted(matches, key=lambda tup: tup[0])
+        #second int in matches element is index of quote
+        print self.replaceFromJson(quotes[1]);
+
+            
+    def replaceFromJson(self, originalString):
+        if self.replacementWords == '':
+            return originalString
+        for replaceEntry in json.loads(self.replacementWords):
+            originalString = originalString.replace(replaceEntry['replace'].encode("ascii"), replaceEntry['with'].encode("ascii"))
+        return originalString
+    
+    def getNumberOfMatches(self, originalString):
+        numberOfMatches = 0
+        if self.replacementWords == '':
+            return numberOfMatches
+        for replaceEntry in json.loads(self.replacementWords):
+            numberOfMatches += originalString.count(replaceEntry['replace'].encode("ascii"))
+        return numberOfMatches
         
         
     def getMergedParagraphs(self):
-        previousQuote = ''
-        for quote in self.getAllParagraphs() :
-            if previousQuote != '':
-                quote = previousQuote + ' ' + quote
-                previousQuote = ''
+        paragraphs = []
+        previousParagraph = ''
+        for paragraph in self.getAllParagraphs() :
+            if previousParagraph != '':
+                paragraph = previousParagraph + ' ' + paragraph
+                previousParagraph = ''
                 
-            if len(quote) > 250:
-                yield quote
+            if len(paragraph) > 250:
+                paragraphs.append(paragraph)
             else :
-                previousQuote = quote
+                previousParagraph = paragraph
+        return paragraphs
                             
     def getAllParagraphs(self):
         
@@ -38,5 +64,6 @@ class QuoteGenerator:
                             yield match.group(1)
 
 if __name__ == "__main__":
-    bm = QuoteGenerator()
+    repWords = '[{"replace": "Gatsby", "with": "Parmahn"}, {"replace": "man", "with": "fish"}]'
+    bm = QuoteGenerator(repWords)
     bm.getQuote()
