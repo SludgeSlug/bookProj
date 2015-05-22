@@ -7,30 +7,43 @@
         
     ResultsController.$inject = ['$scope', 'WordService', '$http', '$q'];
     
+    var apiUrl = 'https://spinbook-sludgeslug.c9.io/api/';
+    
     function ResultsController(scope, wordService, http, q) {
-        
         var resultsCtrl = this;
         
-        scope.words = wordService.words;
+        var quoteNumber = 0;
         
-        resultsCtrl.download = function() {
-            var defer = q.defer();
+        scope.words = wordService.words;
+        scope.quote = getQuote();
+        
+        
+        resultsCtrl.getQuote = getQuote;
+        
+        resultsCtrl.showPrevious = function() {
+            return quoteNumber > 0;
+        }
+
+        resultsCtrl.nextQuote = function() {
+            quoteNumber++;
+            scope.quote = getQuote();
+        }
+        
+        resultsCtrl.previousQuote = function() {
+            quoteNumber--;
+            scope.quote = getQuote();
+        }
+        
+        function getQuote() {
             
-            var request = http({
-                method: 'get',
-                url: 'https://spinbook-sludgeslug.c9.io/api/book/',
-                data: wordService.words
+            http.get(apiUrl + 'quote/', {
+                params: {
+                    index: quoteNumber,
+                    replacementWords: JSON.stringify(wordService.words)
+                }
+            }).then(function(response) {
+                scope.quote = response.data;    
             });
-            
-            request.success(function(data, status, headers, config) {
-                alert('success');
-    			defer.resolve(data);
-    		});
-    		request.error(function(data, status, headers, config) {
-    			scope.error = data;
-    		});
-    		
-    		return defer.promise;
         }
     };
     

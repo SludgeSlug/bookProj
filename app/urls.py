@@ -9,5 +9,6 @@ admin.autodiscover()
 urlpatterns = patterns('',
 
     (r'^api/book', 'app.views.getBook'),
+    (r'^api/quote', 'app.views.getQuote'),
 
 )

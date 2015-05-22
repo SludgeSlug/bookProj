@@ -7,17 +7,16 @@ class QuoteGenerator:
     def __init__(self, replacementWords):
         self.replacementWords = urllib.unquote(replacementWords).decode('utf-8')
     
-    def getQuote(self):
-        
+    def getQuote(self, index):
         quotes = self.getMergedParagraphs()
         matches = []
         
         for quote in quotes:
             matches.append([self.getNumberOfMatches(quote),quotes.index(quote)])
-            
-        matches = sorted(matches, key=lambda tup: tup[0])
+
+        matches = sorted(matches, key=lambda tup: tup[0], reverse=True)
         #second int in matches element is index of quote
-        print self.replaceFromJson(quotes[1]);
+        return self.replaceFromJson(quotes[matches[int(index)][1]]);
 
             
     def replaceFromJson(self, originalString):
@@ -66,4 +65,4 @@ class QuoteGenerator:
 if __name__ == "__main__":
     repWords = '[{"replace": "Gatsby", "with": "Parmahn"}, {"replace": "man", "with": "fish"}]'
     bm = QuoteGenerator(repWords)
-    bm.getQuote()
+    bm.getQuote(0)
