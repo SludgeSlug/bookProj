@@ -23,7 +23,17 @@ class QuoteGenerator:
         if self.replacementWords == '':
             return originalString
         for replaceEntry in json.loads(self.replacementWords):
-            originalString = originalString.replace(replaceEntry['replace'].encode("ascii"), replaceEntry['with'].encode("ascii"))
+            originalWord =  replaceEntry['replace'].encode("ascii")
+            newWord = replaceEntry['with'].encode("ascii")
+            wordLengthDifference = len(newWord) - len(originalWord) 
+            offset = 0
+            regex = re.compile(r"[^a-zA-Z0-9]" + originalWord + "[^a-zA-Z0-9]", re.IGNORECASE)
+            returnString = originalString
+            for match in regex.finditer(originalString):
+                startIndex = match.start() + 1 + offset
+                endIndex = match.end() - 1 + offset
+                originalString = originalString[:startIndex] + newWord + originalString[endIndex:]
+                offset += wordLengthDifference
         return originalString
     
     def getNumberOfMatches(self, originalString):
