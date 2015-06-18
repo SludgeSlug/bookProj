@@ -5,7 +5,7 @@ APP_DIR = os.path.dirname(os.path.abspath(__file__))
 class QuoteGenerator:
     
     def __init__(self, replacementWords):
-        self.replacementWords = urllib.unquote(replacementWords).decode('utf-8')
+        self.replacementWords = replacementWords
     
     def getQuote(self, index):
         quotes = self.getMergedParagraphs()

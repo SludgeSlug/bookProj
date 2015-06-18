@@ -7,7 +7,7 @@
         
     ResultsController.$inject = ['$scope', 'WordService', '$http', '$q'];
     
-    var apiUrl = 'https://spinbook-sludgeslug.c9.io/api/';
+    var apiUrl = '/api/';
     
     function ResultsController(scope, wordService, http, q) {
         var resultsCtrl = this;
@@ -36,7 +36,7 @@
         
         function getQuote() {
             
-            http.get(apiUrl + 'quote/', {
+            http.get(apiUrl + 'quote', {
                 params: {
                     index: quoteNumber,
                     replacementWords: JSON.stringify(wordService.words)

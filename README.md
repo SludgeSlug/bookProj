@@ -17,5 +17,8 @@ http://www.youtube.com/user/c9ide.
 Happy coding!
 The Cloud9 IDE team
 
+install flask using the command sudo pip install Flask
 
-Run server with command 'python manage.py runserver $IP:$PORT'
+run the server by running python app.py
+
+access site via https://bookproj-sludgeslug.c9.io/

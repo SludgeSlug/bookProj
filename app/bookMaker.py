@@ -5,7 +5,7 @@ APP_DIR = os.path.dirname(os.path.abspath(__file__))
 class BookMaker:
 
     def __init__(self, replacementWords):
-        self.replacementWords = urllib.unquote(replacementWords).decode('utf-8')
+        self.replacementWords = replacementWords
 
     def getZipStream(self):
         fileName = os.path.join(APP_DIR, '../files/greatGatsby.epub')
