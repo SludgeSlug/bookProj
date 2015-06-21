@@ -8,10 +8,19 @@
   <script src="scripts/services/wordService.js"></script>
   <script src="scripts/controllers/homeController.js"></script>
   <script src="scripts/controllers/resultsController.js"></script>
+  
+  <link href="style/style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-    <div id="main">
-      <div ng-view></div>
+  <div class="w-container container">
+    <h1 class="logo">SHAMBLE</h1>
+    <div class="w-clearfix">
+      <div class="beta-line"></div>
+      <p class="join">Create your story</p>
+      <div class="beta-line"></div>
+      <br />
+      <div ng-view class="content-wrapper"></div>
     </div>
+  </div>
 </body>
 </html>

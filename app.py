@@ -1,6 +1,5 @@
 import os
 from flask import Flask, render_template, send_from_directory, request, make_response
-#from app.test import Test
 from app.quoteGenerator import QuoteGenerator
 from app.bookMaker import BookMaker
 
@@ -13,6 +12,10 @@ def send_js(path):
 @app.route('/views/<path:path>')
 def send_view(path):
     return send_from_directory('client/views', path)
+    
+@app.route('/style/<path:path>')
+def send_style(path):
+    return send_from_directory('client/style', path)
 
 @app.route('/')
 def index():
