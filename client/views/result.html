@@ -1,9 +1,16 @@
-{{quote}}
 <br />
 <br />
-<a href='' ng-click='resultsCtrl.previousQuote()' ng-show='resultsCtrl.showPrevious()'>Previous</a>
-<a href='' ng-click='resultsCtrl.nextQuote()'>Next</a>
-
+<div class='quote-container'>
+    <div class='quoteButton'>
+        <button ng-click='resultsCtrl.previousQuote()' ng-show='resultsCtrl.showPrevious()' class='button'><</button>
+    </div>
+    <div class='quote'>
+        {{quote}}   
+    </div>
+    <div class='quoteButton'>
+        <button ng-click='resultsCtrl.nextQuote()' class='button'>></button>
+    </div>
+</div>
 <br />
 <br />
 <form action='/api/book' method='post'>
