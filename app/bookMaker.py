@@ -1,4 +1,5 @@
 import os, io, zipfile, json, urllib
+import wordReplacer
 
 APP_DIR = os.path.dirname(os.path.abspath(__file__))
 
@@ -17,7 +18,8 @@ class BookMaker:
             for fileEntryName in originalBook.namelist():
                 with originalBook.open(fileEntryName) as fileEntry:
                     if "main" in fileEntryName and fileEntryName.endswith('.xml'):
-                        zip.writestr(fileEntryName, self.getFileContents(fileEntry.read()))
+                        fileContents = wordReplacer.replaceWords(fileEntry.read(), self.replacementWords)
+                        zip.writestr(fileEntryName, fileContents)
                     else:
                         zip.writestr(fileEntryName, fileEntry.read())
 
@@ -28,10 +30,3 @@ class BookMaker:
         buffer.close()
 
         return ret_zip
-
-    def getFileContents(self, fileContents):
-        if self.replacementWords == '':
-            return fileContents
-        for replaceEntry in json.loads(self.replacementWords):
-            fileContents = fileContents.replace(replaceEntry['replace'].encode("ascii"), replaceEntry['with'].encode("ascii"))
-        return fileContents

@@ -11,22 +11,12 @@ class QuoteGenerator:
     def getQuote(self, index):
         quotes = self.getMergedParagraphs()
         matches = []
-        
         for quote in quotes:
-            matches.append([self.getNumberOfMatches(quote),quotes.index(quote)])
-
+            numberOfMatches = wordReplacer.numberOfMatches(quote, self.replacementWords)
+            matches.append([numberOfMatches,quotes.index(quote)])
         matches = sorted(matches, key=lambda tup: tup[0], reverse=True)
         #second int in matches element is index of quote
         return wordReplacer.replaceWords(quotes[matches[int(index)][1]], self.replacementWords);
-
-    def getNumberOfMatches(self, originalString):
-        numberOfMatches = 0
-        if self.replacementWords == '':
-            return numberOfMatches
-        for replaceEntry in json.loads(self.replacementWords):
-            numberOfMatches += originalString.count(replaceEntry['replace'].encode("ascii"))
-        return numberOfMatches
-        
         
     def getMergedParagraphs(self):
         paragraphs = []
