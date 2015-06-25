@@ -18,6 +18,7 @@ Happy coding!
 The Cloud9 IDE team
 
 install flask using the command sudo pip install Flask
+instll pymongo using sudo pip install pymongo
 
 run the server by running python app.py
 
