@@ -1,6 +1,7 @@
 import re
 import paragraphGenerator, config
 from pymongo import MongoClient
+from pymongo import ASCENDING, DESCENDING
 
 def deleteCollection() :
     collection = getWordsCollection()
@@ -24,6 +25,8 @@ def writeWordsToDb():
             })
     collection = getWordsCollection()
     collection.insert_many(wordDocuments)
+    collection.ensure_index("word")
+    
             
 def updateDictionary(words, word) :
     word = word.lower()
@@ -37,7 +40,3 @@ def getWordsCollection():
     db = connection[config.dbName()]
     db.authenticate(config.username(), config.password())
     return db['words']
-    
-if __name__ == '__main__':
-    deleteCollection()
-    writeWordsToDb()

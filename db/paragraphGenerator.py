@@ -51,7 +51,3 @@ def getAllParagraphs():
                     iterator = regex.finditer(fileEntry.read())
                     for match in iterator:
                         yield match.group(1)
-                        
-if __name__ == '__main__':
-    deleteCollection()
-    writeParagraphsToDb()

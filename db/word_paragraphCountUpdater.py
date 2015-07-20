@@ -22,7 +22,9 @@ def writeToDb() :
                         'paragraphId': paragraph['_id'],
                         'count': v
                     })
-    getCollection('word_paragraph_count').insert_many(documents)
+    collection = getCollection('word_paragraph_count')
+    collection.insert_many(documents)
+    collection.ensure_index("wordId")
     
 def getWords() :
     wordCollection = getCollection('words').find()
@@ -60,7 +62,3 @@ def getCollection(collectionName) :
     db = connection[config.dbName()]
     db.authenticate(config.username(), config.password())
     return db[collectionName]
-
-if __name__ == '__main__':
-    deleteCollection()
-    writeToDb()
