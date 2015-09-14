@@ -1,9 +1,18 @@
 import os
+from pymongo import MongoClient
 from flask import Flask, render_template, send_from_directory, request, make_response
 from app.quoteGenerator import QuoteGenerator
 from app.bookMaker import BookMaker
+from app import config
+
+def primeDb():
+    connection = MongoClient(config.dbServer(), config.dbPort()) #Connect to mongodb
+    db = connection[config.dbName()]
+    db.authenticate(config.username(), config.password())
+    return db
 
 app = Flask(__name__)
+db = primeDb()
 
 @app.route('/scripts/<path:path>')
 def send_js(path):
@@ -30,7 +39,7 @@ def downloadBook():
     
 @app.route('/api/quote')
 def quote():
-    quoteGenerator = QuoteGenerator(request.args.get('replacementWords'))
+    quoteGenerator = QuoteGenerator(request.args.get('replacementWords'), db)
     return quoteGenerator.getQuote(request.args.get('index'))
 
 if __name__ == '__main__':

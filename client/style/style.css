@@ -116,6 +116,19 @@ table {
   display: inline-block;
   width: 70%;
 }
+.home-left {
+  width: 40%;
+  float: left;
+}
+.home-right {
+  width: 60%;
+  float: left;
+}
+.muword {
+  background-color: white;
+  color: black;
+  width: 30%;
+}
 .container {
   padding-right: 127px;
   padding-left: 127px;
@@ -211,6 +224,14 @@ table {
     width: 100%;
     padding-right: 24px;
     padding-left: 24px;
+  }
+  .home-left {
+    width: 30%;
+    float: left;
+  }
+  .home-right {
+    width: 30%;
+    float: right;
   }
   .container {
     padding-right: 10px;

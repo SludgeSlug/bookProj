@@ -1,21 +1,32 @@
-<p>Replace some words</p>
-<table>
-    <tr>
-        <th>Old word</th>
-        <th>New word</th>
-        <th></th>
-    </tr>
-    <tr ng-repeat="word in words">
-        <td><input type='text' ng-model='words[$index].replace' class='field' /></td>
-        <td><input type='text' ng-model='words[$index].with' class='field' /></td>
-        <td><input type='button' ng-click='homeCtrl.deleteRow($index)' ng-show='homeCtrl.showDelete()' value='X' class='button' /></td>
-    </tr>
-    <tr>
-        <td><input type='button' ng-click='homeCtrl.addNewWord()' value='Add word' class='button' /></td>
-        <td></td>
-    </tr>
-</table>
-
+<div class="home-left">
+    <p>Most used words</p>
+    <table>
+        <tr ng-repeat="word in mostUsedWords">
+            <td class="muword">{{word.word}}</td>
+            <td class="muword">{{word.occurences}}</td>
+            <td><input type='button' value='>' class='button' />
+        </tr>
+    </table>
+</div>
+<div class="home-right">
+    <p>Replace some words</p>
+    <table>
+        <tr>
+            <th>Old word</th>
+            <th>New word</th>
+            <th></th>
+        </tr>
+        <tr ng-repeat="word in words">
+            <td><input type='text' ng-model='words[$index].replace' class='field' /></td>
+            <td><input type='text' ng-model='words[$index].with' class='field' /></td>
+            <td><input type='button' ng-click='homeCtrl.deleteRow($index)' ng-show='homeCtrl.showDelete()' value='X' class='button' /></td>
+        </tr>
+        <tr>
+            <td><input type='button' ng-click='homeCtrl.addNewWord()' value='Add word' class='button' /></td>
+            <td></td>
+        </tr>
+    </table>
+</div>
 
 <br />
 <br />

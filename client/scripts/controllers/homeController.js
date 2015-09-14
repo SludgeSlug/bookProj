@@ -11,7 +11,11 @@
         
         var homeCtrl = this;
         
+        var mostUsedOffset = 0;
+        var mostUsedLimit = 5;
+        
         scope.words = wordService.words;
+        scope.mostUsedWords = wordService.mostUsedWords(mostUsedOffset, mostUsedLimit);
         
         homeCtrl.addNewWord = function() {
             scope.words.push(
