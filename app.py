@@ -1,8 +1,10 @@
 import os
+import json
 from pymongo import MongoClient
 from flask import Flask, render_template, send_from_directory, request, make_response
 from app.quoteGenerator import QuoteGenerator
 from app.bookMaker import BookMaker
+from app.mostUsedWords import MostUsedWords
 from app import config
 
 def primeDb():
@@ -41,6 +43,14 @@ def downloadBook():
 def quote():
     quoteGenerator = QuoteGenerator(request.args.get('replacementWords'), db)
     return quoteGenerator.getQuote(request.args.get('index'))
+    
+@app.route('/api/mostused')
+def mostused():
+    offset = request.args.get('offset')
+    limit = request.args.get('limit')
+    mostUsedWords = MostUsedWords(db)
+    ret = mostUsedWords.get(offset, limit)
+    return json.dumps(ret)
 
 if __name__ == '__main__':
     port = int(os.getenv('PORT', 8080))

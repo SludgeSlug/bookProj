@@ -15,7 +15,15 @@
         var mostUsedLimit = 5;
         
         scope.words = wordService.words;
-        scope.mostUsedWords = wordService.mostUsedWords(mostUsedOffset, mostUsedLimit);
+        
+        getMostUsedWords();
+        
+        function getMostUsedWords() {
+            wordService.mostUsedWords(mostUsedOffset, mostUsedLimit)
+                .then(function(response) {
+                    scope.mostUsedWords = response;    
+                });
+        }
         
         homeCtrl.addNewWord = function() {
             scope.words.push(
