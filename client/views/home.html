@@ -6,6 +6,11 @@
             <td class="muword">{{word.count}}</td>
             <td><input type='button' value='>' class='button' />
         </tr>
+        <tr>
+            <td><a href='' ng-click='homeCtrl.previous()' ng-show='homeCtrl.showPrevious()'>Previous</a></td>
+            <td></td>
+            <td><a href='' ng-click='homeCtrl.next()' ng-show='homeCtrl.showNext()'>Next</a></td>
+        </tr>
     </table>
 </div>
 <div class="home-right">

@@ -43,6 +43,24 @@
             location.path('/result');    
         };
         
+        homeCtrl.previous = function() {
+            mostUsedOffset = mostUsedOffset - 5;
+            getMostUsedWords();
+        }
+        
+        homeCtrl.next = function() {
+            mostUsedOffset = mostUsedOffset + 5;
+            getMostUsedWords();
+        }
+        
+        homeCtrl.showPrevious = function() {
+            return mostUsedOffset > 0;
+        }
+        
+        homeCtrl.showNext = function() {
+            return true;
+        }
+        
     };
     
 })();
