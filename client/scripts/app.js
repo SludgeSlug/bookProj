@@ -7,7 +7,12 @@ app.config(function($routeProvider) {
         .when('/', {
             templateUrl : 'views/home.html',
             controller  : 'HomeController',
-            controllerAs : 'homeCtrl'
+            controllerAs : 'homeCtrl',
+            resolve: {
+                wordCount: ['WordService', function(wordService) {
+                    return wordService.numberOfWords();                    
+                }]
+            }
         })
         
         .when('/result', {

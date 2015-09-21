@@ -5,9 +5,9 @@
         .module('app')
         .controller('HomeController', HomeController);
         
-    HomeController.$inject = ['$scope', '$location', 'WordService'];
+    HomeController.$inject = ['$scope', '$location', 'WordService', 'wordCount'];
     
-    function HomeController(scope, location, wordService) {
+    function HomeController(scope, location, wordService, wordCount) {
         
         var homeCtrl = this;
         
@@ -15,6 +15,7 @@
         var mostUsedLimit = 5;
         
         scope.words = wordService.words;
+        var numberOfWords = wordCount;
         
         getMostUsedWords();
         
@@ -78,7 +79,7 @@
         }
         
         homeCtrl.showNext = function() {
-            return true;
+            return mostUsedOffset > numberOfWords;
         }
         
     };

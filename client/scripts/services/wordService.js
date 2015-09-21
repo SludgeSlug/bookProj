@@ -30,6 +30,16 @@
             return def.promise;
         }
         
+        wordSvc.numberOfWords = function() {
+            var def = $q.defer();
+            
+            http.get(apiUrl + 'numberOfWords').then(function(response) {
+                def.resolve(response.data);
+            });
+            
+            return def.promise;
+        }
+        
         return wordSvc;
     };
     

@@ -8,3 +8,6 @@ class MostUsedWords:
         for word in words:
             ret.append(word)
         return ret
+        
+    def numberOfWords(self):
+        return self.db['words'].count()

@@ -49,8 +49,12 @@ def mostused():
     offset = request.args.get('offset')
     limit = request.args.get('limit')
     mostUsedWords = MostUsedWords(db)
-    ret = mostUsedWords.get(offset, limit)
-    return json.dumps(ret)
+    return json.dumps(mostUsedWords.get(offset, limit))
+
+@app.route('/api/numberOfWords')
+def numberOfWords():
+    mostUsedWords = MostUsedWords(db)
+    return str(mostUsedWords.numberOfWords())
 
 if __name__ == '__main__':
     port = int(os.getenv('PORT', 8080))
