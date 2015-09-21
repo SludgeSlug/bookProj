@@ -4,7 +4,13 @@
         <tr ng-repeat="word in mostUsedWords">
             <td class="muword">{{word.word}}</td>
             <td class="muword">{{word.count}}</td>
-            <td><input type='button' value='>' class='button' />
+            <td>
+                <input type='button' 
+                    value='>' 
+                    ng-click='homeCtrl.addMostUsedWord(word.word)' 
+                    ng-show='homeCtrl.wordAdded(word.word)'
+                    class='button' />
+            </td>
         </tr>
         <tr>
             <td><a href='' ng-click='homeCtrl.previous()' ng-show='homeCtrl.showPrevious()'>Previous</a></td>

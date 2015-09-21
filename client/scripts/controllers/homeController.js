@@ -53,6 +53,26 @@
             getMostUsedWords();
         }
         
+        homeCtrl.addMostUsedWord = function(word) {
+            if(scope.words.length === 1 &&
+                scope.words[0].replace === "") {
+                
+                scope.words = [{"replace" : word, "with": ""}];     
+            } else {
+                scope.words.push(
+                {"replace" : word, "with" : ""});
+            }
+        }
+        
+        homeCtrl.wordAdded = function(word) {
+            for(var i in scope.words) {
+                if(scope.words[i].replace === word) {
+                    return false;
+                }
+            }
+            return true;
+        }
+        
         homeCtrl.showPrevious = function() {
             return mostUsedOffset > 0;
         }
