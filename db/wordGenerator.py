@@ -7,20 +7,18 @@ def deleteCollection() :
     collection = getWordsCollection()
     collection.drop()
 
-def writeWordsToDb():
+def writeWordsToDb(bookId, fileName):
     wordsToSave = {}
-    for paragraph in paragraphGenerator.getMergedParagraphs():
+    for paragraph in paragraphGenerator.getMergedParagraphs(fileName):
         words = re.split(r"[^a-zA-Z']+", paragraph)
         for word in words:
             if word != '' :
                 updateDictionary(wordsToSave, word)
     wordDocuments = []
-    wordId = 0
     for k, v in wordsToSave.iteritems() :
-        wordId += 1
         wordDocuments.append({
-                "_id": wordId,
                 "word": k,
+                "bookId": bookId,
                 "count": v
             })
     collection = getWordsCollection()

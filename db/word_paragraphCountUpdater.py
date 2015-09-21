@@ -5,19 +5,19 @@ from pymongo import MongoClient
 def deleteCollection() :
     getCollection('word_paragraph_count').drop()
 
-def writeToDb() :
-    paragraphs = getCollection('paragraphs').find()
-    words = getWords()
+def writeToDb(bookId) :
+    paragraphs = getCollection('paragraphs').find({'bookId': bookId})
+    words = getWords(bookId)
     documents = []
     documentId = 0
     for paragraph in paragraphs :
+        documentId = documentId + 1
+        print documentId
         wordCounts = getWordCounts(paragraph['paragraph'])
         for k, v in wordCounts.iteritems() :
             wordId = getWordId(words, k)
             if wordId is not None:
-                documentId += 1
                 documents.append({
-                        '_id': documentId,
                         'wordId': wordId,
                         'paragraphId': paragraph['_id'],
                         'count': v
@@ -26,8 +26,8 @@ def writeToDb() :
     collection.insert_many(documents)
     collection.ensure_index("wordId")
     
-def getWords() :
-    wordCollection = getCollection('words').find()
+def getWords(bookId) :
+    wordCollection = getCollection('words').find({'bookId': bookId})
     words = []
     for word in wordCollection :
         words.append(word)
@@ -52,7 +52,8 @@ def getWordCounts(paragraph) :
 def updateWordsDictionary(words, word) :
     word = word.lower()
     if word in words.keys() :
-        words[word] += 1
+        x = 1
+        #words[word] += 1
     else :
         words[word] = 1
     

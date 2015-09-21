@@ -2,20 +2,16 @@ import os, re, zipfile, sys
 import config
 from pymongo import MongoClient
 
-APP_DIR = os.path.dirname(os.path.abspath(__file__))
-
 def deleteCollection():
     collection = getParagraphsCollection()
     collection.drop()
 
-def writeParagraphsToDb():
+def writeParagraphsToDb(bookId, fileName):
     paragraphDocuments = []
-    paragraphNumber = 0
-    for paragraph in getMergedParagraphs():
-        paragraphNumber += 1
+    for paragraph in getMergedParagraphs(fileName):
         paragraphDocuments.append({
-                "_id" : paragraphNumber,
-                "paragraph":paragraph 
+                "paragraph":paragraph,
+                "bookId": bookId
             })
     collection = getParagraphsCollection()
     collection.insert_many(paragraphDocuments)
@@ -26,10 +22,10 @@ def getParagraphsCollection():
     db.authenticate(config.username(), config.password())
     return db['paragraphs']
 
-def getMergedParagraphs():
+def getMergedParagraphs(fileName):
     paragraphs = []
     previousParagraph = ''
-    for paragraph in getAllParagraphs() :
+    for paragraph in getAllParagraphs(fileName) :
         if previousParagraph != '':
             paragraph = previousParagraph + ' ' + paragraph
             previousParagraph = ''
@@ -40,8 +36,7 @@ def getMergedParagraphs():
             previousParagraph = paragraph
     return paragraphs
                         
-def getAllParagraphs():
-    fileName = os.path.join(APP_DIR, '../files/greatGatsby.epub')
+def getAllParagraphs(fileName):
     regex = re.compile(r'.*<p>((.|\n)*?)<\/p>', re.MULTILINE)
     
     with zipfile.ZipFile(fileName, 'r') as originalBook:
