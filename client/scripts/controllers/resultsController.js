@@ -5,11 +5,11 @@
         .module('app')
         .controller('ResultsController', ResultsController);
         
-    ResultsController.$inject = ['$scope', 'WordService', '$http', '$q'];
+    ResultsController.$inject = ['$scope', 'WordService', '$http', '$q', 'BookService'];
     
     var apiUrl = '/api/';
     
-    function ResultsController(scope, wordService, http, q) {
+    function ResultsController(scope, wordService, http, q, bookService) {
         var resultsCtrl = this;
         
         var quoteNumber = 0;
@@ -39,7 +39,8 @@
             http.get(apiUrl + 'quote', {
                 params: {
                     index: quoteNumber,
-                    replacementWords: JSON.stringify(wordService.words)
+                    replacementWords: JSON.stringify(wordService.words),
+                    bookId: bookService.bookId
                 }
             }).then(function(response) {
                 scope.quote = response.data;    

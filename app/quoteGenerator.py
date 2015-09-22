@@ -9,9 +9,8 @@ class QuoteGenerator:
         self.replacementWords = replacementWords
         self.db = db
         
-    def getQuote(self, index):
+    def getQuote(self, index, bookId):
         paragraphCount = {}
-        bookId = 1
         for replaceEntry in json.loads(self.replacementWords):
             word =  replaceEntry['replace'].encode("ascii")
             wordId = self.db['words'].find_one({'word':word.lower(), 'bookId': bookId})['_id']

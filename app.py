@@ -5,6 +5,7 @@ from flask import Flask, render_template, send_from_directory, request, make_res
 from app.quoteGenerator import QuoteGenerator
 from app.bookMaker import BookMaker
 from app.mostUsedWords import MostUsedWords
+from app.books import Books
 from app import config
 
 def primeDb():
@@ -41,20 +42,28 @@ def downloadBook():
     
 @app.route('/api/quote')
 def quote():
+    bookId = int(request.args.get('bookId'))
     quoteGenerator = QuoteGenerator(request.args.get('replacementWords'), db)
-    return quoteGenerator.getQuote(request.args.get('index'))
+    return quoteGenerator.getQuote(request.args.get('index'), bookId)
     
 @app.route('/api/mostused')
 def mostused():
     offset = request.args.get('offset')
     limit = request.args.get('limit')
+    bookId = int(request.args.get('bookId'))
     mostUsedWords = MostUsedWords(db)
-    return json.dumps(mostUsedWords.get(offset, limit))
+    return json.dumps(mostUsedWords.get(offset, limit, bookId))
 
 @app.route('/api/numberOfWords')
 def numberOfWords():
+    bookId = int(request.args.get('bookId'))
     mostUsedWords = MostUsedWords(db)
-    return str(mostUsedWords.numberOfWords())
+    return str(mostUsedWords.numberOfWords(bookId))
+    
+@app.route('/api/books')
+def books():
+    books = Books(db)
+    return json.dumps(books.get())
 
 if __name__ == '__main__':
     port = int(os.getenv('PORT', 8080))

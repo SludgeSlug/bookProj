@@ -5,9 +5,9 @@
         .module('app')
         .controller('EnterWordsController', EnterWordsController);
         
-    EnterWordsController.$inject = ['$scope', '$location', 'WordService', 'wordCount'];
+    EnterWordsController.$inject = ['$scope', '$location', 'WordService', 'wordCount', 'BookService'];
     
-    function EnterWordsController(scope, location, wordService, wordCount) {
+    function EnterWordsController(scope, location, wordService, wordCount, bookService) {
         
         var enterWordsCtrl = this;
         
@@ -20,11 +20,11 @@
         getMostUsedWords();
         
         function getMostUsedWords() {
-            wordService.mostUsedWords(mostUsedOffset, mostUsedLimit)
+            wordService.mostUsedWords(mostUsedOffset, mostUsedLimit, bookService.bookId)
                 .then(function(response) {
                     scope.mostUsedWords = response;    
                 });
-        }
+        };
         
         enterWordsCtrl.addNewWord = function() {
             scope.words.push(
@@ -47,12 +47,12 @@
         enterWordsCtrl.previous = function() {
             mostUsedOffset = mostUsedOffset - 5;
             getMostUsedWords();
-        }
+        };
         
         enterWordsCtrl.next = function() {
             mostUsedOffset = mostUsedOffset + 5;
             getMostUsedWords();
-        }
+        };
         
         enterWordsCtrl.addMostUsedWord = function(word) {
             if(scope.words.length === 1 &&
@@ -63,7 +63,7 @@
                 scope.words.push(
                 {"replace" : word, "with" : ""});
             }
-        }
+        };
         
         enterWordsCtrl.wordAdded = function(word) {
             for(var i in scope.words) {
@@ -72,15 +72,15 @@
                 }
             }
             return true;
-        }
+        };
         
         enterWordsCtrl.showPrevious = function() {
             return mostUsedOffset > 0;
-        }
+        };
         
         enterWordsCtrl.showNext = function() {
             return mostUsedOffset < numberOfWords;
-        }
+        };
         
     };
     

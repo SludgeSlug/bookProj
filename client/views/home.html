@@ -1,0 +1,9 @@
+<br />
+<br />
+<select ng-model="selectedBook">
+    <option ng-repeat="option in homeCtrl.books" value="{{option.id}}">{{option.title}}</option>
+</select>
+<br />
+<br />
+<br />
+<input type='button' ng-click='homeCtrl.select()' value='Next' class='button'/>

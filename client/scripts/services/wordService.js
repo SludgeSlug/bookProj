@@ -15,13 +15,14 @@
         
         wordSvc.words = [{"replace" : "", "with" : ""}];
         
-        wordSvc.mostUsedWords = function(offset, limit) {
+        wordSvc.mostUsedWords = function(offset, limit, bookId) {
             var def = $q.defer();
             
             http.get(apiUrl + 'mostused', {
                 params: {
                     offset: offset,
-                    limit: limit
+                    limit: limit,
+                    bookId: bookId
                 }
             }).then(function(response) {
                 def.resolve(response.data);
@@ -30,10 +31,14 @@
             return def.promise;
         }
         
-        wordSvc.numberOfWords = function() {
+        wordSvc.numberOfWords = function(bookId) {
             var def = $q.defer();
             
-            http.get(apiUrl + 'numberOfWords').then(function(response) {
+            http.get(apiUrl + 'numberOfWords', {
+                params: {
+                    bookId: bookId
+                }
+            }).then(function(response) {
                 def.resolve(response.data);
             });
             
