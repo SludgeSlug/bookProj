@@ -64,6 +64,12 @@ def numberOfWords():
 def books():
     books = Books(db)
     return json.dumps(books.get())
+    
+@app.route('/api/bookTitle')
+def bookTitle():
+    bookId = int(request.args.get('bookId'))
+    books = Books(db)
+    return books.getTitle(bookId)
 
 if __name__ == '__main__':
     port = int(os.getenv('PORT', 8080))

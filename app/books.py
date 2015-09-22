@@ -8,3 +8,7 @@ class Books:
         for book in books:
             ret.append({'id': book['_id'], 'title': book['title']})
         return ret
+        
+    def getTitle(self, bookId):
+        book = self.db['books'].find_one({'_id': bookId})
+        return book['title']

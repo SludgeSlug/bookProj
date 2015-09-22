@@ -5,9 +5,11 @@
         .module('app')
         .controller('EnterWordsController', EnterWordsController);
         
-    EnterWordsController.$inject = ['$scope', '$location', 'WordService', 'wordCount', 'BookService'];
+    EnterWordsController.$inject = ['$scope', '$location', 'WordService', 
+        'wordCount', 'BookService', 'bookTitle'];
     
-    function EnterWordsController(scope, location, wordService, wordCount, bookService) {
+    function EnterWordsController(scope, location, wordService, 
+        wordCount, bookService, bookTitle) {
         
         var enterWordsCtrl = this;
         
@@ -15,6 +17,8 @@
         var mostUsedLimit = 5;
         
         scope.words = wordService.words;
+        scope.bookTitle = bookTitle;
+        
         var numberOfWords = parseInt(wordCount);
         
         getMostUsedWords();

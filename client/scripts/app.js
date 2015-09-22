@@ -22,6 +22,9 @@ app.config(function($routeProvider) {
             resolve: {
                 wordCount: ['WordService', 'BookService', function(wordService, bookService) {
                     return wordService.numberOfWords(bookService.bookId);                    
+                }],
+                bookTitle: ['BookService', function(bookService) {
+                    return bookService.getBookTitle();
                 }]
             }
         })

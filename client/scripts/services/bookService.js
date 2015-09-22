@@ -24,6 +24,20 @@
             
             return def.promise;
         }
+        
+        bookSvc.getBookTitle = function() {
+            var def = $q.defer();
+            
+            http.get(apiUrl + 'bookTitle', {
+                params: {
+                    bookId: bookSvc.bookId
+                }
+            }).then(function(response) {
+                def.resolve(response.data);
+            });
+            
+            return def.promise;
+        }
 
         return bookSvc;
     };
