@@ -1,5 +1,6 @@
 import paragraphGenerator, wordGenerator, word_paragraphCountUpdater, bookGenerator
 import os, zipfile, glob
+from datetime import datetime
 
 APP_DIR = os.path.dirname(os.path.abspath(__file__))
 
@@ -19,5 +20,7 @@ def loadData() :
         word_paragraphCountUpdater.writeToDb(bookId)
     
 if __name__ == '__main__':
+    print datetime.now()
     clearCollections()
     loadData()
+    print datetime.now()

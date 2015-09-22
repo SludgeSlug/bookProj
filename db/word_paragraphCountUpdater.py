@@ -9,10 +9,7 @@ def writeToDb(bookId) :
     paragraphs = getCollection('paragraphs').find({'bookId': bookId})
     words = getWords(bookId)
     documents = []
-    documentId = 0
     for paragraph in paragraphs :
-        documentId = documentId + 1
-        print documentId
         wordCounts = getWordCounts(paragraph['paragraph'])
         for k, v in wordCounts.iteritems() :
             wordId = getWordId(words, k)
@@ -52,8 +49,7 @@ def getWordCounts(paragraph) :
 def updateWordsDictionary(words, word) :
     word = word.lower()
     if word in words.keys() :
-        x = 1
-        #words[word] += 1
+        words[word] += 1
     else :
         words[word] = 1
     
