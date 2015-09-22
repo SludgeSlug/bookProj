@@ -3,13 +3,13 @@
     
     angular
         .module('app')
-        .controller('HomeController', HomeController);
+        .controller('EnterWordsController', EnterWordsController);
         
-    HomeController.$inject = ['$scope', '$location', 'WordService', 'wordCount'];
+    EnterWordsController.$inject = ['$scope', '$location', 'WordService', 'wordCount'];
     
-    function HomeController(scope, location, wordService, wordCount) {
+    function EnterWordsController(scope, location, wordService, wordCount) {
         
-        var homeCtrl = this;
+        var enterWordsCtrl = this;
         
         var mostUsedOffset = 0;
         var mostUsedLimit = 5;
@@ -26,35 +26,35 @@
                 });
         }
         
-        homeCtrl.addNewWord = function() {
+        enterWordsCtrl.addNewWord = function() {
             scope.words.push(
                 {"replace" : "", "with" : ""}
                 );
         };
         
-        homeCtrl.deleteRow = function(index) {
+        enterWordsCtrl.deleteRow = function(index) {
             scope.words.splice(index, 1);
         };
         
-        homeCtrl.showDelete = function() {
+        enterWordsCtrl.showDelete = function() {
             return scope.words.length > 1;
         };
         
-        homeCtrl.generate = function() {
+        enterWordsCtrl.generate = function() {
             location.path('/result');    
         };
         
-        homeCtrl.previous = function() {
+        enterWordsCtrl.previous = function() {
             mostUsedOffset = mostUsedOffset - 5;
             getMostUsedWords();
         }
         
-        homeCtrl.next = function() {
+        enterWordsCtrl.next = function() {
             mostUsedOffset = mostUsedOffset + 5;
             getMostUsedWords();
         }
         
-        homeCtrl.addMostUsedWord = function(word) {
+        enterWordsCtrl.addMostUsedWord = function(word) {
             if(scope.words.length === 1 &&
                 scope.words[0].replace === "") {
                 
@@ -65,7 +65,7 @@
             }
         }
         
-        homeCtrl.wordAdded = function(word) {
+        enterWordsCtrl.wordAdded = function(word) {
             for(var i in scope.words) {
                 if(scope.words[i].replace === word) {
                     return false;
@@ -74,11 +74,11 @@
             return true;
         }
         
-        homeCtrl.showPrevious = function() {
+        enterWordsCtrl.showPrevious = function() {
             return mostUsedOffset > 0;
         }
         
-        homeCtrl.showNext = function() {
+        enterWordsCtrl.showNext = function() {
             return mostUsedOffset < numberOfWords;
         }
         

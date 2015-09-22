@@ -5,9 +5,9 @@ app.config(function($routeProvider) {
     $routeProvider
 
         .when('/', {
-            templateUrl : 'views/home.html',
-            controller  : 'HomeController',
-            controllerAs : 'homeCtrl',
+            templateUrl : 'views/enterWords.html',
+            controller  : 'EnterWordsController',
+            controllerAs : 'enterWordsCtrl',
             resolve: {
                 wordCount: ['WordService', function(wordService) {
                     return wordService.numberOfWords();                    

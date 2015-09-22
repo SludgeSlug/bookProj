@@ -7,15 +7,15 @@
             <td>
                 <input type='button' 
                     value='>' 
-                    ng-click='homeCtrl.addMostUsedWord(word.word)' 
-                    ng-show='homeCtrl.wordAdded(word.word)'
+                    ng-click='enterWordsCtrl.addMostUsedWord(word.word)' 
+                    ng-show='enterWordsCtrl.wordAdded(word.word)'
                     class='button' />
             </td>
         </tr>
         <tr>
-            <td><a href='' ng-click='homeCtrl.previous()' ng-show='homeCtrl.showPrevious()'>Previous</a></td>
+            <td><a href='' ng-click='enterWordsCtrl.previous()' ng-show='enterWordsCtrl.showPrevious()'>Previous</a></td>
             <td></td>
-            <td><a href='' ng-click='homeCtrl.next()' ng-show='homeCtrl.showNext()'>Next</a></td>
+            <td><a href='' ng-click='enterWordsCtrl.next()' ng-show='enterWordsCtrl.showNext()'>Next</a></td>
         </tr>
     </table>
 </div>
@@ -30,10 +30,10 @@
         <tr ng-repeat="word in words">
             <td><input type='text' ng-model='words[$index].replace' class='field' /></td>
             <td><input type='text' ng-model='words[$index].with' class='field' /></td>
-            <td><input type='button' ng-click='homeCtrl.deleteRow($index)' ng-show='homeCtrl.showDelete()' value='X' class='button' /></td>
+            <td><input type='button' ng-click='enterWordsCtrl.deleteRow($index)' ng-show='enterWordsCtrl.showDelete()' value='X' class='button' /></td>
         </tr>
         <tr>
-            <td><input type='button' ng-click='homeCtrl.addNewWord()' value='Add word' class='button' /></td>
+            <td><input type='button' ng-click='enterWordsCtrl.addNewWord()' value='Add word' class='button' /></td>
             <td></td>
         </tr>
     </table>
@@ -42,7 +42,7 @@
 <br />
 <br />
 
-<input type='button' ng-click='homeCtrl.generate()' value='Generate' class='button'/>
+<input type='button' ng-click='enterWordsCtrl.generate()' value='Generate' class='button'/>
 
 <br />
 <br />
