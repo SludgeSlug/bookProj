@@ -4,10 +4,12 @@ class MostUsedWords:
     
     def get(self, offset, limit):
         ret = []
-        words = self.db['words'].find({}).sort('count', -1).skip(int(offset)).limit(int(limit))
+        bookId = 1
+        words = self.db['words'].find({'bookId': bookId}).sort('count', -1).skip(int(offset)).limit(int(limit))
         for word in words:
-            ret.append(word)
+            ret.append({'word': word['word'], 'count': word['count']})
         return ret
         
     def numberOfWords(self):
-        return self.db['words'].count()
+        bookId = 1
+        return self.db['words'].find({'bookId': bookId}).count()

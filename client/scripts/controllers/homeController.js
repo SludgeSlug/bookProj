@@ -15,7 +15,7 @@
         var mostUsedLimit = 5;
         
         scope.words = wordService.words;
-        var numberOfWords = wordCount;
+        var numberOfWords = parseInt(wordCount);
         
         getMostUsedWords();
         
@@ -79,7 +79,7 @@
         }
         
         homeCtrl.showNext = function() {
-            return mostUsedOffset > numberOfWords;
+            return mostUsedOffset < numberOfWords;
         }
         
     };
