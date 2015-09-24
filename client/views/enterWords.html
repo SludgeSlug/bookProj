@@ -9,10 +9,10 @@
                 <td class="muword">{{word.count}}</td>
                 <td>
                     <input type='button' 
-                        value='>' 
+                        value='+' 
                         ng-click='enterWordsCtrl.addMostUsedWord(word.word)' 
                         ng-show='enterWordsCtrl.wordAdded(word.word)'
-                        class='button' />
+                        class='form-button' />
                 </td>
             </tr>
             <tr>
@@ -33,7 +33,7 @@
                         value='>' 
                         ng-click='enterWordsCtrl.addMostUsedWord(word.word)' 
                         ng-show='enterWordsCtrl.wordAdded(word.word)'
-                        class='button' />
+                        class='form-button' />
                 </td>
             </tr>
             <tr>
@@ -55,7 +55,7 @@
         <tr ng-repeat="word in words">
             <td><input type='text' ng-model='words[$index].replace' class='field' /></td>
             <td><input type='text' ng-model='words[$index].with' class='field' /></td>
-            <td><input type='button' ng-click='enterWordsCtrl.deleteRow($index)' ng-show='enterWordsCtrl.showDelete()' value='X' class='button' /></td>
+            <td><input type='button' ng-click='enterWordsCtrl.deleteRow($index)' ng-show='enterWordsCtrl.showDelete()' value='X' class='form-button' /></td>
         </tr>
         <tr>
             <td><input type='button' ng-click='enterWordsCtrl.addNewWord()' value='Add word' class='button' /></td>
