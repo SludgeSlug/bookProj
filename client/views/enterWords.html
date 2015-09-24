@@ -1,24 +1,48 @@
 <h2>{{bookTitle}}</h2>
 <div class="home-left">
-    <p>Most used words</p>
-    <table>
-        <tr ng-repeat="word in mostUsedWords">
-            <td class="muword">{{word.word}}</td>
-            <td class="muword">{{word.count}}</td>
-            <td>
-                <input type='button' 
-                    value='>' 
-                    ng-click='enterWordsCtrl.addMostUsedWord(word.word)' 
-                    ng-show='enterWordsCtrl.wordAdded(word.word)'
-                    class='button' />
-            </td>
-        </tr>
-        <tr>
-            <td><a href='' ng-click='enterWordsCtrl.previous()' ng-show='enterWordsCtrl.showPrevious()'>Previous</a></td>
-            <td></td>
-            <td><a href='' ng-click='enterWordsCtrl.next()' ng-show='enterWordsCtrl.showNext()'>Next</a></td>
-        </tr>
-    </table>
+    <div class="mobile-muwords">
+        <a ng-click="enterWordsCtrl.toggleMuWords()" ng-show="!showMostUsedWords">+ Most used words</a>
+        <a ng-click="enterWordsCtrl.toggleMuWords()" ng-show="showMostUsedWords">- Most used words</a>
+        <table class="muWords" ng-show="showMostUsedWords">
+            <tr ng-repeat="word in mostUsedWords">
+                <td class="muword">{{word.word}}</td>
+                <td class="muword">{{word.count}}</td>
+                <td>
+                    <input type='button' 
+                        value='>' 
+                        ng-click='enterWordsCtrl.addMostUsedWord(word.word)' 
+                        ng-show='enterWordsCtrl.wordAdded(word.word)'
+                        class='button' />
+                </td>
+            </tr>
+            <tr>
+                <td><a href='' ng-click='enterWordsCtrl.previous()' ng-show='enterWordsCtrl.showPrevious()'>Previous</a></td>
+                <td></td>
+                <td><a href='' ng-click='enterWordsCtrl.next()' ng-show='enterWordsCtrl.showNext()'>Next</a></td>
+            </tr>
+        </table>
+    </div>
+    <div class="desktop-muwords">
+        <p>Most used words</p>
+        <table class="muWords">
+            <tr ng-repeat="word in mostUsedWords">
+                <td class="muword">{{word.word}}</td>
+                <td class="muword">{{word.count}}</td>
+                <td>
+                    <input type='button' 
+                        value='>' 
+                        ng-click='enterWordsCtrl.addMostUsedWord(word.word)' 
+                        ng-show='enterWordsCtrl.wordAdded(word.word)'
+                        class='button' />
+                </td>
+            </tr>
+            <tr>
+                <td><a href='' ng-click='enterWordsCtrl.previous()' ng-show='enterWordsCtrl.showPrevious()'>Previous</a></td>
+                <td></td>
+                <td><a href='' ng-click='enterWordsCtrl.next()' ng-show='enterWordsCtrl.showNext()'>Next</a></td>
+            </tr>
+        </table>
+    </div>
 </div>
 <div class="home-right">
     <p>Replace some words</p>

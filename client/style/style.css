@@ -189,28 +189,16 @@ table {
   float: left;
   background-color: rgba(255, 255, 255, 0.36);
 }
-@media (max-width: 991px) {
-  .subtitle {
-    font-size: 29px;
-    text-shadow: none;
-  }
-  .content-wrapper {
-    width: 81%;
-  }
-  .container {
-    padding-right: 57px;
-    padding-left: 57px;
-  }
-  .join {
-    width: 50%;
-    font-size: 21px;
-    text-shadow: none;
-  }
-  .beta-line {
-    width: 25%;
-  }
+
+.mobile-muwords {
+  display: none;
 }
-@media (max-width: 767px) {
+
+.desktop-muwords {
+  display: block;
+}
+
+@media screen and (max-width: 767px) {
   body {
     padding-top: 65px;
   }
@@ -224,14 +212,6 @@ table {
     width: 100%;
     padding-right: 24px;
     padding-left: 24px;
-  }
-  .home-left {
-    width: 30%;
-    float: left;
-  }
-  .home-right {
-    width: 30%;
-    float: right;
   }
   .container {
     padding-right: 10px;
@@ -247,51 +227,22 @@ table {
   .join {
     text-shadow: none;
   }
-}
-@media (max-width: 479px) {
-  h2 {
-    font-size: 30px;
-    line-height: 31px;
-    text-shadow: none;
+  
+  .home-left {
+    width: 99%;
+    position: relative;
   }
-  p {
-    font-size: 20px;
-    text-shadow: none;
+  
+  .home-right {
+    width: 99%;
+    position: relative;
   }
-  .button {
-    width: 100%;
-    margin-left: 0px;
-    border-top-left-radius: 2px;
-    border-bottom-left-radius: 2px;
+  
+  .mobile-muwords {
+    display: block;
   }
-  .subtitle {
-    padding-bottom: 36px;
-    font-size: 22px;
-    line-height: 26px;
-    text-shadow: none;
-  }
-  .field {
-    width: 100%;
-    border-top-right-radius: 2px;
-    border-bottom-right-radius: 2px;
-    text-align: center;
-  }
-  .container {
-    padding-right: 10px;
-    padding-left: 10px;
-  }
-  .logo {
-    font-size: 43px;
-    text-shadow: none;
-  }
-  .join {
-    width: 75%;
-    font-size: 19px;
-    line-height: 22px;
-    letter-spacing: 4px;
-    text-shadow: none;
-  }
-  .beta-line {
-    width: 12%;
+  
+  .desktop-muwords {
+    display: none;
   }
 }

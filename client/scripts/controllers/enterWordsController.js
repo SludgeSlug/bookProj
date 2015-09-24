@@ -18,6 +18,7 @@
         
         scope.words = wordService.words;
         scope.bookTitle = bookTitle;
+        scope.showMostUsedWords = false;
         
         var numberOfWords = parseInt(wordCount);
         
@@ -29,6 +30,10 @@
                     scope.mostUsedWords = response;    
                 });
         };
+        
+        enterWordsCtrl.toggleMuWords = function() {
+            scope.showMostUsedWords = !scope.showMostUsedWords;
+        }
         
         enterWordsCtrl.addNewWord = function() {
             scope.words.push(
