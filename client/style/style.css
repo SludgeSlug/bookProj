@@ -69,10 +69,11 @@ table {
 }
 .button {
   display: block;
-  width: 100%;
+  width: 80%;
   height: 54px;
   margin-left: -1px;
   margin-bottom: 19px;
+  position: relative;
   padding: 4px 29px;
   border: 3px solid white;
   background-color: transparent;
@@ -84,6 +85,8 @@ table {
   text-align: center;
   text-decoration: none;
   text-transform: uppercase;
+  left:10%;
+  right:10%;
 }
 .button:hover {
   background-color: white;
@@ -138,7 +141,7 @@ table {
 }
 .content-wrapper {
   display: inline-block;
-  width: 70%;
+  width: 100%;
 }
 .home-left {
   width: 40%;
@@ -150,7 +153,7 @@ table {
 }
 .muword {
   background-color: white;
-  width: 30%;
+  width: 40%;
   height: 54px;
   line-height: 54px;
   margin-top:0px;
@@ -282,6 +285,7 @@ table {
   
   .mobile-muwords {
     display: block;
+    
   }
   
   .desktop-muwords {
@@ -303,4 +307,19 @@ table {
   .dropdown {
     width: 90%;
   }
+  
+  .tabWord {
+    width:40%;
+  }
+  
+  .tabButton {
+    width: 10%;
+  }
+  
+  .button {
+    width: 98%;
+    left: 1%;
+    right: 1%;
+  }
+  
 }

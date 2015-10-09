@@ -4,10 +4,10 @@
         <a ng-click="enterWordsCtrl.toggleMuWords()" ng-show="!showMostUsedWords">+ Most used words</a>
         <a ng-click="enterWordsCtrl.toggleMuWords()" ng-show="showMostUsedWords">- Most used words</a>
         <table class="muWords" ng-show="showMostUsedWords">
-            <tr ng-repeat="word in mostUsedWords">
-                <td><p class="muword">{{word.word}}</p></td>
-                <td><p class="muword">{{word.count}}</p></td>
-                <td>
+            <tr ng-repeat="word in mostUsedWords" class="mobile-muword-row">
+                <td class="mobile-muword-cell"><p class="muword">{{word.word}}</p></td>
+                <td class="mobile-muword-cell"><p class="muword">{{word.count}}</p></td>
+                <td  class="mobile-muword-button">
                     <input type='button' 
                         value='+' 
                         ng-click='enterWordsCtrl.addMostUsedWord(word.word)' 
@@ -53,21 +53,19 @@
             <th></th>
         </tr>
         <tr ng-repeat="word in words">
-            <td><input type='text' ng-model='words[$index].replace' class='field' /></td>
-            <td><input type='text' ng-model='words[$index].with' class='field' /></td>
-            <td><input type='button' ng-click='enterWordsCtrl.deleteRow($index)' ng-show='enterWordsCtrl.showDelete()' value='X' class='form-button' /></td>
+            <td class="tabWord"><input type='text' ng-model='words[$index].replace' class='field' /></td>
+            <td class="tabWord"><input type='text' ng-model='words[$index].with' class='field' /></td>
+            <td class="tabButton"><input type='button' ng-click='enterWordsCtrl.deleteRow($index)' ng-show='enterWordsCtrl.showDelete()' value='X' class='form-button' /></td>
         </tr>
         <tr>
             <td><input type='button' ng-click='enterWordsCtrl.addNewWord()' value='Add word' class='button' /></td>
             <td></td>
         </tr>
     </table>
+    
+    <br />
+    <br />
+    <input type='button' ng-click='enterWordsCtrl.generate()' value='Generate' class='button'/>
 </div>
-
-<br />
-<br />
-
-<input type='button' ng-click='enterWordsCtrl.generate()' value='Generate' class='button'/>
-
 <br />
 <br />
