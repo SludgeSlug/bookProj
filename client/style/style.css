@@ -322,4 +322,8 @@ table {
     right: 1%;
   }
   
+  .quote {
+    width: 60%;
+    margin-left: 5%;
+  }
 }
