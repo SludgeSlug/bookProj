@@ -5,8 +5,8 @@
         <a ng-click="enterWordsCtrl.toggleMuWords()" ng-show="showMostUsedWords">- Most used words</a>
         <table class="muWords" ng-show="showMostUsedWords">
             <tr ng-repeat="word in mostUsedWords" class="mobile-muword-row">
-                <td class="mobile-muword-cell"><p class="muword">{{word.word}}</p></td>
-                <td class="mobile-muword-cell"><p class="muword">{{word.count}}</p></td>
+                <td class="muword-cell"><p class="muword">{{word.word}}</p></td>
+                <td class="muword-cell"><p class="muword">{{word.count}}</p></td>
                 <td  class="mobile-muword-button">
                     <input type='button' 
                         value='+' 
@@ -24,10 +24,10 @@
     </div>
     <div class="desktop-muwords">
         <p>Most used words</p>
-        <table class="muWords">
-            <tr ng-repeat="word in mostUsedWords">
-                <td><p class="muword">{{word.word}}</p></td>
-                <td><p class="muword">{{word.count}}</p></td>
+        <table>
+            <tr ng-repeat="word in mostUsedWords" class="muWords">
+                <td class="muword-cell"><p class="muword">{{word.word}}</p></td>
+                <td class="muword-cell"><p class="muword">{{word.count}}</p></td>
                 <td>
                     <input type='button' 
                         value='>' 
